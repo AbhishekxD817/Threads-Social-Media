@@ -12,10 +12,9 @@ export const allPosts = async (req, res, next) => {
 }
 export const createPost = async (req, res, next) => {
     try {
-        let { content, owner } = req.body;
+        let { content } = req.body;
         let newPost = new Post({
-            content,
-            owner
+            content
         })
         await newPost.save();
         return res.status(200).json({ message: "post created successfully" });
@@ -55,18 +54,13 @@ export const updatePost = async (req, res, next) => {
         return res.status(500).json({ message });
     }
 }
-
-
-// post deletion is not allowed because 
-// there is no authentication right now in our app
-// but we write a example post delete here, which we are not going to use
-// export const deletePost = async (req, res, next) => {
-//     try {
-//         let { id } = req.params;
-//         let post = await Post.findByIdAndDelete(id);
-//         return res.status(200).json({ message: "Post deleted successfully" });
-//     } catch (error) {
-//         let { message = "Some error ocurred while fetching data from db" } = error;
-//         return res.status(500).json({ message });
-//     }
-// }
+export const deletePost = async (req, res, next) => {
+    try {
+        let { id } = req.params;
+        let post = await Post.findByIdAndDelete(id);
+        return res.status(200).json({ message: "Post deleted successfully" });
+    } catch (error) {
+        let { message = "Some error ocurred while fetching data from db" } = error;
+        return res.status(500).json({ message });
+    }
+}

@@ -6,11 +6,6 @@ const postSchema = mongoose.Schema({
         maxLength: 50,
         minLength: 2,
         required: true
-    },
-    owner: {
-        type: String,
-        required: true,
-        minLength: 2
     }
 },{timestamps:true})
 
