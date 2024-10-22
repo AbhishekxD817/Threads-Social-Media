@@ -3,7 +3,7 @@ import Post from "../models/post-model.js"
 
 export const allPosts = async (req, res, next) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().sort({ createdAt: -1 });
         return res.status(200).json({ posts });
     } catch (error) {
         const { message = "An error ocurred while fetching all posts from db" } = error;
